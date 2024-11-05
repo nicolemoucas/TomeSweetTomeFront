@@ -1,0 +1,26 @@
+<main class="app">
+    <div class="main">
+        @if (!isPageConnexion()) {
+            <mat-toolbar>
+                <!-- todo active-link-button bouton-lien tertiary-button style -->
+                <button mat-button routerLink="/usager" routerLinkActive="active-link-button"
+                        class="bouton-lien tertiary-button">
+                    Usager
+                </button>
+                <button mat-button routerLink="/reservation" routerLinkActive="active-link-button"
+                        class="bouton-lien tertiary-button">
+                    Réservation
+                </button>
+                <button mat-button routerLink="/oeuvre" routerLinkActive="active-link-button"
+                        class="bouton-lien tertiary-button">
+                    Œuvres
+                </button>
+                <button mat-button routerLink="/exemplaire" routerLinkActive="active-link-button"
+                        class="bouton-lien tertiary-button">
+                    Exemplaires
+                </button>
+            </mat-toolbar>
+        }
+        <router-outlet></router-outlet>
+    </div>
+</main>

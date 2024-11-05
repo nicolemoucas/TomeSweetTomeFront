@@ -1,0 +1,74 @@
+<div class="page-wrapper">
+    <div class="page-content">
+        <mat-card class="oeuvre-modif-card">
+            <!-- todo change ajouter or update-->
+            <mat-card-content>
+                <form class="create-oeuvre-form" [formGroup]="oeuvreForm" (ngSubmit)="onSubmit()">
+
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Type d'oeuvre</mat-label>
+                        <mat-select formControlName="oeuvreType">
+                            <mat-option>Choisir</mat-option>
+                            @for (typeO of eOeuvreType; track typeO) {
+                                <mat-option [value]="typeO.key">{{ typeO.value }}</mat-option>
+                            }
+                        </mat-select>
+                        <mat-error>Veuillez saisir un type d'oeuvre</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Titre</mat-label>
+                        <input matInput formControlName="title" id="title" required/>
+                        <mat-error>Veuillez saisir un titre</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Auteur</mat-label>
+                        <input matInput formControlName="author" id="author" required/>
+                        <mat-error>Veuillez saisir un auteur</mat-error>
+                    </mat-form-field>
+
+<!--                    <mat-form-field>-->
+<!--                        <mat-datepicker>-->
+<!--&lt;!&ndash; todo ncm date picker&ndash;&gt;-->
+<!--                        </mat-datepicker>-->
+<!--                    </mat-form-field>-->
+
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Catégorie</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option>Choisir</mat-option>
+                            @for (cat of eCategorie; track cat) {
+                                <mat-option [value]="cat.key">{{ cat.value }}</mat-option>
+                            }
+                        </mat-select>
+                        <mat-error>Veuillez saisir une catégorie</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Type de public</mat-label>
+                        <mat-select formControlName="publicType">
+                            <mat-option>Choisir</mat-option>
+                            @for (typeP of ePublicType; track typeP) {
+                                <mat-option [value]="typeP.key">{{ typeP.value }}</mat-option>
+                            }
+                        </mat-select>
+                        <mat-error>Veuillez saisir un type de public</mat-error>
+                    </mat-form-field>
+
+                    <div class="action-buttons">
+                        <!-- todo add error button style-->
+                        <button mat-button type="button" (click)="cancelModifications()" class="error-button">
+                            <mat-icon>close</mat-icon>
+                            Annuler
+                        </button>
+                        <button mat-button type="submit">
+                            <mat-icon>save</mat-icon>
+                            Enregistrer
+                        </button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+# Default ignored files
+/.idea
+.DS_Store
+# Angular ignored files
+/node_modules
+/.angular

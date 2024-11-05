@@ -1,0 +1,24 @@
+@import '../../../styles/breakpoints.scss';
+
+.page-content {
+    align-items: center;
+    width: 100%;
+}
+
+.oeuvre-modif-card {
+    @include max-width(md);
+    width: 100%;
+}
+
+.create-oeuvre-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    justify-content: flex-end;
+}

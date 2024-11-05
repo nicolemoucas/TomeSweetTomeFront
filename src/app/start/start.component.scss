@@ -1,0 +1,32 @@
+@import '../../styles/breakpoints.scss';
+
+:host {
+    height: 100%;
+}
+.page-content {
+    @include max-width(lg);
+}
+
+.start-card {
+    height: 100%;
+    background-color: antiquewhite; // todo remove
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-card-title {
+    margin: 1em;
+    flex: 0 0 20%;
+}
+
+.start-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20em;
+    justify-content: end;
+    flex: 1;
+    margin: 1em;
+}

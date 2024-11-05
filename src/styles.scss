@@ -1,0 +1,49 @@
+@import 'styles/breakpoints.scss';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.page-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+.page-content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    @include max-width(xxxl);
+}
+
+// TODO NCM FIXME ajouter theme
+//.error-snackbar.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
+//    @include mat.card-color(m3-theme.$light-theme);
+//
+//    background-color: mat.get-theme-color(m3-theme.$light-theme, error, 50) !important;
+//
+//    --mat-snack-bar-button-color: mat.get-theme-color(m3-theme.$light-theme, primary, 100) !important;
+//}
+
+.action-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    gap: 1em;
+}
+
+.action-card:hover {
+    cursor: pointer;
+}
+
+.action-card-title {
+    color: white; // todo remove
+}

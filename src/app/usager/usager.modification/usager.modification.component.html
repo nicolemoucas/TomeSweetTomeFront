@@ -1,0 +1,84 @@
+<div class="page-wrapper">
+    <div class="page-content">
+        <mat-card>
+            <mat-card-content>
+                <form class="create-usager-form" [formGroup]="usagerForm" (ngSubmit)="onSubmit()">
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Nom</mat-label>
+                        <input matInput formControlName="lastName" id="nom" required autocomplete="off">
+                        <mat-error>Veuillez saisir un nom</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Prénom</mat-label>
+                        <input matInput formControlName="firstName" id="prenom" required autocomplete="off"/>
+                        <mat-error>Veuillez saisir un prénom</mat-error>
+                    </mat-form-field>
+
+                    <!-- todo ncm fixme datepicker icon not shown -->
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Date de naissance</mat-label>
+                        <input matInput [matDatepicker]="datePicker" formControlName="birthday" id="birthday" required
+                               autocomplete="off"/>
+                        <mat-datepicker-toggle matIconSuffix [for]="datePicker">
+                            <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #datePicker></mat-datepicker>
+                        <mat-error>Veuillez saisir une date de naissance</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>E-mail</mat-label>
+                        <input matInput formControlName="mail" id="mail" type="mail" required autocomplete="off"/>
+                        <mat-error>Veuillez saisir une adresse mail</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Phone</mat-label>
+                        <input matInput formControlName="phone" id="phone" required autocomplete="off"/>
+                        <mat-error>Veuillez saisir un numéro de téléphone</mat-error>
+                    </mat-form-field>
+
+                    <div class="address-sub-form" formGroupName="address">
+                        <mat-form-field appearance="outline" class="twenty-percent-width" subscriptSizing="dynamic">
+                            <mat-label>Rue</mat-label>
+                            <input matInput formControlName="street" id="street" required autocomplete="off"/>
+                            <mat-error>Veuillez saisir une rue</mat-error>
+                        </mat-form-field>
+
+                        <div class="horizontal-box">
+                            <mat-form-field appearance="outline" class="full-width" subscriptSizing="dynamic">
+                                <mat-label>Code postal</mat-label>
+                                <input matInput formControlName="zipcode" id="zipcode" required autocomplete="off"/>
+                                <mat-error>Veuillez saisir un code postal</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" class="full-width" subscriptSizing="dynamic">
+                                <mat-label>Ville</mat-label>
+                                <input matInput formControlName="city" id="city" required autocomplete="off"/>
+                                <mat-error>Veuillez saisir une ville</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                            <mat-label>Pays</mat-label>
+                            <input matInput formControlName="country" id="country" required autocomplete="off"/>
+                            <mat-error>Veuillez saisir un pays</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button mat-button type="button" (click)="cancelModifications()" class="error-button">
+                            <mat-icon>close</mat-icon>
+                            Annuler
+                        </button>
+                        <button mat-button type="submit">
+                            <mat-icon>save</mat-icon>
+                            Enregistrer
+                        </button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

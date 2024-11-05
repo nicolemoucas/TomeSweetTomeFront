@@ -1,0 +1,36 @@
+.create-usager-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.address-sub-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    justify-content: flex-end;
+}
+
+.horizontal-box {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.full-width {
+    flex: 1;
+}
+
+.twenty-percent-width {
+    flex: 0 0 20%;
+}
+
+.eighty-percent-width {
+    flex: 2;
+}
