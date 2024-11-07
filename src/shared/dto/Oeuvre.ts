@@ -6,7 +6,6 @@ export interface Oeuvre {
     id?: string;
     title: string;
     author: string;
-    publicationDate: string;
     category: ECategorie;
     oeuvreType: EOeuvreType;
     publicType: EPublicType;

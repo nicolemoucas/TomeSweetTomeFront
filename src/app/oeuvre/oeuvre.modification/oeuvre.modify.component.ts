@@ -10,17 +10,16 @@ import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
-import {MatOption, provideNativeDateAdapter} from "@angular/material/core";
+import {MatOption} from "@angular/material/core";
 import {MatSelect} from "@angular/material/select";
-import {MatDatepicker} from "@angular/material/datepicker";
 import {ECategorie} from "../../../shared/enums/ECategorie";
 import {EPublicType} from "../../../shared/enums/EPublicType";
 import {EOeuvreType} from "../../../shared/enums/EOeuvreType";
 
 @Component({
     selector: 'app-oeuvre.modification',
-    templateUrl: './oeuvre.modification.component.html',
-    styleUrl: './oeuvre.modification.component.scss',
+    templateUrl: './oeuvre.modify.component.html',
+    styleUrl: './oeuvre.modify.component.scss',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
@@ -34,14 +33,10 @@ import {EOeuvreType} from "../../../shared/enums/EOeuvreType";
         MatLabel,
         MatOption,
         MatSelect,
-        ReactiveFormsModule,
-        MatDatepicker
-    ],
-    providers: [
-        provideNativeDateAdapter()
+        ReactiveFormsModule
     ]
 })
-export class OeuvreModificationComponent {
+export class OeuvreModifyComponent {
     readonly #oeuvreService = inject(OeuvreService);
     readonly snackBar = inject(MatSnackBar);
     readonly #location = inject(Location);
@@ -54,7 +49,6 @@ export class OeuvreModificationComponent {
         oeuvreType: new FormControl('', [Validators.required]),
         title: new FormControl('', [Validators.required]),
         author: new FormControl('', [Validators.required]),
-        publicationDate: new FormControl(new Date().toISOString(), [Validators.required]),
         category: new FormControl('', [Validators.required]),
         publicType: new FormControl('', [Validators.required]),
     })
@@ -73,7 +67,6 @@ export class OeuvreModificationComponent {
                 oeuvreType: formValue.oeuvreType,
                 title: formValue.title,
                 author: formValue.author,
-                publicationDate: formValue.publicationDate,
                 category: formValue.category,
                 publicType: formValue.publicType
             }

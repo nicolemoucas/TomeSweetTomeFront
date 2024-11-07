@@ -1,6 +1,6 @@
 import {Routes} from "@angular/router";
 import {OeuvreComponent} from "./oeuvre.component";
-import {OeuvreModificationComponent} from "./oeuvre.modification/oeuvre.modification.component";
+import {OeuvreModifyComponent} from "./oeuvre.modification/oeuvre.modify.component";
 
 export const routes: Routes = [
     {
@@ -9,8 +9,8 @@ export const routes: Routes = [
         title: 'Œuvres'
     },
     {
-        path: 'modification',
-        component: OeuvreModificationComponent,
+        path: 'modify',
+        component: OeuvreModifyComponent,
         title: 'Œuvres modification' // fixme update to creation or modif
     },
 ]

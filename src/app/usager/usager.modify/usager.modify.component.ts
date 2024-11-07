@@ -16,9 +16,9 @@ import {DEFAULT_SNACK_DURATION_IN_MS} from "../../../shared/constants";
 import {Location} from "@angular/common";
 
 @Component({
-    selector: 'app-usager.modification',
-    templateUrl: './usager.modification.component.html',
-    styleUrl: './usager.modification.component.scss',
+    selector: 'app.usager.modify',
+    templateUrl: './usager.modify.component.html',
+    styleUrl: './usager.modify.component.scss',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
@@ -40,7 +40,7 @@ import {Location} from "@angular/common";
         provideNativeDateAdapter()
     ]
 })
-export class UsagerModificationComponent {
+export class UsagerModifyComponent {
     readonly #usagerService = inject(UsagerService);
     readonly #location = inject(Location);
     readonly snackBar = inject(MatSnackBar);
