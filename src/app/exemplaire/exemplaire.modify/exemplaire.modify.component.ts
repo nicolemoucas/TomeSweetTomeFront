@@ -1,14 +1,14 @@
 import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
 import {MatCard, MatCardContent} from "@angular/material/card";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatError, MatFormField, MatHint, MatLabel} from "@angular/material/form-field";
 import {ExemplaireService} from "../../../shared/services/ExemplaireService";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatButton} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
 import {Location} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
-import {MatInput} from "@angular/material/input";
+import {MatInputModule} from "@angular/material/input";
 import {EEtatExemplaire} from "../../../shared/enums/EEtatExemplaire";
 import {EOeuvreType} from "../../../shared/enums/EOeuvreType";
 import {Exemplaire} from "../../../shared/dto/Exemplaire";
@@ -16,11 +16,13 @@ import {DEFAULT_SNACK_DURATION_IN_MS} from "../../../shared/constants";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {OeuvreService} from "../../../shared/services/OeuvreService";
 import {toSignal} from "@angular/core/rxjs-interop";
+import {provideNativeDateAdapter} from "@angular/material/core";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 
 @Component({
-    selector: 'app-exemplaire.modification',
-    templateUrl: './exemplaire.modification.component.html',
-    styleUrl: './exemplaire.modification.component.scss',
+    selector: 'app-exemplaire.modify',
+    templateUrl: './exemplaire.modify.component.html',
+    styleUrl: './exemplaire.modify.component.scss',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
@@ -34,19 +36,25 @@ import {toSignal} from "@angular/core/rxjs-interop";
         MatButton,
         RouterLink,
         MatIcon,
-        MatInput,
+        MatInputModule,
         MatError,
+        MatDatepicker,
+        MatDatepickerInput,
+        MatDatepickerToggle,
+        MatHint
+    ],
+    providers: [
+        provideNativeDateAdapter()
     ]
 })
-export class ExemplaireModificationComponent {
+export class ExemplaireModifyComponent {
     readonly #exemplaireService = inject(ExemplaireService);
     readonly #oeuvreService = inject(OeuvreService);
     readonly #location = inject(Location);
     readonly snackBar = inject(MatSnackBar);
     loadingExemplaire = signal(false);
-    protected readonly eEtatExemplaire = Object.entries(EEtatExemplaire).map(([key, value]) => ({key, value}));
-    protected readonly eOeuvreType = Object.entries(EOeuvreType).map(([key, value]) => ({key, value}));
-    // TODO NCM REFACTO
+    readonly eEtatExemplaire = Object.entries(EEtatExemplaire).map(([key, value]) => ({key, value}));
+    readonly eOeuvreType = Object.entries(EOeuvreType).map(([key, value]) => ({key, value}));
     livreList = toSignal(this.#oeuvreService.getAsNommable("livre").pipe(), {initialValue: []});
     magazineList = toSignal(this.#oeuvreService.getAsNommable("magazine").pipe(), {initialValue: []});
 
@@ -55,7 +63,8 @@ export class ExemplaireModificationComponent {
         idOeuvre: new FormControl({value: '', disabled: true}, [Validators.required]),
         edition: new FormControl('', [Validators.required]),
         etat: new FormControl('', [Validators.required]),
-        descriptionEtat: new FormControl('', [Validators.required])
+        descriptionEtat: new FormControl('', [Validators.required]),
+        publicationDate: new FormControl(new Date().toISOString(), [Validators.required]),
     });
 
     constructor() {
@@ -66,7 +75,7 @@ export class ExemplaireModificationComponent {
             } else {
                 idOeuvreControl?.enable({emitEvent: false});
             }
-        })
+        });
     }
 
     cancelModifications() {
@@ -83,7 +92,8 @@ export class ExemplaireModificationComponent {
                 idOeuvre: formValue.idOeuvre,
                 edition: formValue.edition,
                 etat: formValue.etat,
-                descriptionEtat: formValue.descriptionEtat
+                descriptionEtat: formValue.descriptionEtat,
+                publicationDate: formValue.publicationDate,
             }
 
             this.#exemplaireService.postExemplaire(exemplaire).subscribe({
@@ -100,7 +110,7 @@ export class ExemplaireModificationComponent {
                         'FERMER', {
                             duration: DEFAULT_SNACK_DURATION_IN_MS,
                             panelClass: ['error-snackbar']
-                        })
+                        });
                 }
             });
         }

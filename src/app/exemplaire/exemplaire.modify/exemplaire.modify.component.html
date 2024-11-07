@@ -4,6 +4,7 @@
             <!-- todo change ajouter or update-->
             <mat-card-content>
                 <form class="create-exemplaire-form" [formGroup]="exemplaireForm" (ngSubmit)="onSubmit()">
+                    <!-- Type oeuvre -->
                     <mat-form-field appearance="outline" subscriptSizing="dynamic">
                         <mat-label>Type d'œuvre</mat-label>
                         <mat-select formControlName="oeuvreType">
@@ -15,6 +16,7 @@
                         <mat-error>Veuillez saisir un type d'oeuvre</mat-error>
                     </mat-form-field>
 
+                    <!-- Oeuvre -->
                     <mat-form-field appearance="outline" subscriptSizing="dynamic">
                         <mat-label>Œuvre</mat-label>
                         <mat-select formControlName="idOeuvre">
@@ -40,12 +42,14 @@
                         <mat-error>Veuillez saisir une oeuvre</mat-error>
                     </mat-form-field>
 
+                    <!-- Édition -->
                     <mat-form-field appearance="outline" subscriptSizing="dynamic">
                         <mat-label>Édition</mat-label>
                         <input matInput formControlName="edition" id="edition" required/>
                         <mat-error>Veuillez saisir une édition</mat-error>
                     </mat-form-field>
 
+                    <!-- État -->
                     <mat-form-field appearance="outline" subscriptSizing="dynamic">
                         <mat-label>État</mat-label>
                         <mat-select formControlName="etat">
@@ -57,10 +61,20 @@
                         <mat-error>Veuillez saisir un état</mat-error>
                     </mat-form-field>
 
+                    <!-- Description état -->
                     <mat-form-field appearance="outline" subscriptSizing="dynamic">
                         <mat-label>Description état</mat-label>
                         <input matInput formControlName="descriptionEtat" id="descriptionEtat" required/>
                         <mat-error>Veuillez saisir une description de l'état</mat-error>
+                    </mat-form-field>
+
+                    <!-- Date publication -->
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="publicationDatePicker" formControlName="publicationDate">
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="publicationDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #publicationDatePicker></mat-datepicker>
+                        <mat-error>Veuillez saisir une date de publication</mat-error>
                     </mat-form-field>
 
                     <div class="action-buttons">
