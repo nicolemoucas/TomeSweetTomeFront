@@ -1,0 +1,76 @@
+<div class="page-wrapper">
+    <div class="page-content">
+        <mat-card class="exemplaire-modif-card">
+            <mat-card-content>
+                <form class="delete-exemplaire-form" [formGroup]="exemplaireForm" (ngSubmit)="onSubmit()">
+                    <!-- Type oeuvre -->
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Type d'oeuvre</mat-label>
+                        <mat-select formControlName="oeuvreType">
+                            <mat-option>Choisir</mat-option>
+                            @for (etat of eOeuvreType; track etat) {
+                                <mat-option [value]="etat.key">{{ etat.value }}</mat-option>
+                            }
+                        </mat-select>
+                        <mat-error>Veuillez saisir un type d'oeuvre</mat-error>
+                    </mat-form-field>
+
+                    <!-- Oeuvre -->
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Œuvre</mat-label>
+                        <mat-select formControlName="idOeuvre">
+                            <!-- TODO REFACTO -->
+                            @if (exemplaireForm.value['oeuvreType'] == "LIVRE") {
+                                @if (livreList().length == 0) {
+                                    <mat-option>Aucun livre disponible</mat-option>
+                                } @else {
+                                    @for (livre of livreList(); track livre) {
+                                        <mat-option [value]="livre.id">{{ livre.title }}</mat-option>
+                                    }
+                                }
+                            } @else if (exemplaireForm.value['oeuvreType'] == "MAGAZINE") {
+                                @if (magazineList().length == 0) {
+                                    <mat-option>Aucun magazine disponible</mat-option>
+                                } @else {
+                                    @for (magazine of magazineList(); track magazine) {
+                                        <mat-option [value]="magazine.id">{{ magazine.title }}</mat-option>
+                                    }
+                                }
+                            }
+                        </mat-select>
+                        <mat-error>Veuillez saisir une oeuvre</mat-error>
+                    </mat-form-field>
+
+                    <!-- Exemplaire -->
+                    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                        <mat-label>Exemplaire</mat-label>
+                        <mat-select formControlName="idExemplaire">
+                            @if (!exemplaireList()) {
+                                <mat-option>Aucun exemplaire disponible</mat-option>
+                            } @else {
+                                @for (exemplaire of exemplaireList(); track exemplaire) {
+                                    <mat-option [value]="exemplaire.id">{{ exemplaire.edition }}
+                                        - {{ exemplaire.publicationDate | date: 'dd/MM/yyyy' }} - {{ exemplaire.etat }} ({{ exemplaire.descriptionEtat}})
+                                    </mat-option>
+                                }
+                            }
+                        </mat-select>
+                        <mat-error>Veuillez saisir une oeuvre</mat-error>
+                    </mat-form-field>
+
+                    <div class="action-buttons">
+                        <!-- todo add error button style-->
+                        <button mat-button type="button" (click)="cancelDelete()" class="error-button">
+                            <mat-icon>close</mat-icon>
+                            Annuler
+                        </button>
+                        <button mat-button type="submit">
+                            <mat-icon>save</mat-icon>
+                            Enregistrer
+                        </button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
